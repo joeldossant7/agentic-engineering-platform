@@ -3,7 +3,7 @@
   "version": "1.0",
   "description": "Detects ambiguous inputs and resolves them before routing to the PO Agent. Lightweight, fast, conversational.",
   "model": {
-    "id": "claude-sonnet-4-6",
+    "registry_key": "claude-sonnet-latest",
     "max_tokens": 2048,
     "temperature": 0.1
   },

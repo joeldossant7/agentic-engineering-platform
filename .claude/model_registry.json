@@ -1,0 +1,395 @@
+{
+  "version": "2.0",
+  "description": "Hybrid multi-provider model registry for agentic systems. Supports cloud APIs, local Ollama runtimes, and HuggingFace transformers with plug-and-play routing.",
+  "default_routing": {
+    "reasoning": "claude-opus-4-7",
+    "coding": "claude-sonnet-4-6",
+    "fast_tasks": "claude-haiku-4-5-20251001",
+    "local_general": "llama-3.1-70b-instruct",
+    "local_coding": "deepseek-coder-v2",
+    "vision": "gpt-4o",
+    "cheap_reasoning": "qwen-2.5-72b-instruct"
+  },
+  "aliases": {
+    "claude-opus-latest": "claude-opus-4-7",
+    "claude-sonnet-latest": "claude-sonnet-4-6",
+    "claude-haiku-latest": "claude-haiku-4-5-20251001",
+    "local-best": "llama-3.1-70b-instruct",
+    "local-code": "deepseek-coder-v2",
+    "cheap-reasoner": "qwen-2.5-72b-instruct"
+  },
+  "providers": {
+    "anthropic": {
+      "type": "cloud_api",
+      "base_url": "https://api.anthropic.com/v1",
+      "supports_tools": true,
+      "supports_streaming": true
+    },
+    "openai": {
+      "type": "cloud_api",
+      "base_url": "https://api.openai.com/v1",
+      "supports_tools": true,
+      "supports_streaming": true
+    },
+    "ollama": {
+      "type": "local_runtime",
+      "base_url": "http://localhost:11434",
+      "supports_tools": false,
+      "supports_streaming": true
+    },
+    "huggingface": {
+      "type": "local_transformers",
+      "device": "cuda",
+      "quantization": "4bit",
+      "supports_tools": false
+    }
+  },
+  "models": {
+    "claude-opus-4-7": {
+      "provider": "anthropic",
+      "deployment_type": "cloud",
+      "family": "opus",
+      "vendor_family": "claude",
+      "version": "4.7",
+      "api_model_id": "claude-opus-4-7",
+      "context_window": 200000,
+      "max_output_tokens": 32000,
+      "supports_thinking": true,
+      "supports_vision": true,
+      "supports_function_calling": true,
+      "capabilities": [
+        "reasoning",
+        "systems_design",
+        "architecture",
+        "code",
+        "vision",
+        "extended_thinking"
+      ],
+      "cost_tier": "very_high",
+      "latency_tier": "medium",
+      "recommended_for": [
+        "po_agent",
+        "planner_agent",
+        "research_agent",
+        "architecture_reviews"
+      ],
+      "temperature_profile": {
+        "default": 0.4,
+        "creative": 0.8,
+        "strict": 0.1
+      },
+      "policy_ref": "C-08"
+    },
+
+    "claude-sonnet-4-6": {
+      "provider": "anthropic",
+      "deployment_type": "cloud",
+      "family": "sonnet",
+      "vendor_family": "claude",
+      "version": "4.6",
+      "api_model_id": "claude-sonnet-4-6",
+      "context_window": 200000,
+      "max_output_tokens": 16000,
+      "supports_thinking": true,
+      "supports_vision": true,
+      "supports_function_calling": true,
+      "capabilities": [
+        "reasoning",
+        "coding",
+        "vision",
+        "clarification",
+        "agent_orchestration",
+        "ticket_assembly"
+      ],
+      "cost_tier": "medium",
+      "latency_tier": "fast",
+      "recommended_for": [
+        "clarification_node",
+        "jira_agent",
+        "execution_agent",
+        "review_agent"
+      ],
+      "temperature_profile": {
+        "default": 0.3,
+        "creative": 0.7,
+        "strict": 0.1
+      },
+      "policy_ref": "C-09"
+    },
+
+    "claude-haiku-4-5-20251001": {
+      "provider": "anthropic",
+      "deployment_type": "cloud",
+      "family": "haiku",
+      "vendor_family": "claude",
+      "version": "4.5",
+      "api_model_id": "claude-haiku-4-5-20251001",
+      "context_window": 200000,
+      "max_output_tokens": 8000,
+      "supports_thinking": false,
+      "supports_vision": true,
+      "supports_function_calling": true,
+      "capabilities": [
+        "routing",
+        "summarization",
+        "classification",
+        "speed",
+        "light_code"
+      ],
+      "cost_tier": "low",
+      "latency_tier": "very_fast",
+      "recommended_for": [
+        "routing_tasks",
+        "quick_summarization",
+        "metadata_extraction"
+      ],
+      "policy_ref": null
+    },
+
+    "gpt-4o": {
+      "provider": "openai",
+      "deployment_type": "cloud",
+      "family": "gpt-4o",
+      "vendor_family": "gpt",
+      "version": "2025-02",
+      "api_model_id": "gpt-4o",
+      "context_window": 128000,
+      "max_output_tokens": 16000,
+      "supports_thinking": false,
+      "supports_vision": true,
+      "supports_function_calling": true,
+      "capabilities": [
+        "vision",
+        "tool_use",
+        "multimodal",
+        "speech",
+        "ui_analysis"
+      ],
+      "cost_tier": "high",
+      "latency_tier": "fast",
+      "recommended_for": [
+        "vision_agent",
+        "ocr_pipeline",
+        "ui_analysis_agent"
+      ],
+      "notes": "Best multimodal fallback."
+    },
+
+    "llama-3.1-70b-instruct": {
+      "provider": "ollama",
+      "deployment_type": "local",
+      "family": "llama",
+      "vendor_family": "meta",
+      "version": "3.1",
+      "runtime_model_name": "llama3.1:70b",
+      "huggingface_repo": "meta-llama/Llama-3.1-70B-Instruct",
+      "quantization": "q4_k_m",
+      "context_window": 131072,
+      "supports_thinking": false,
+      "supports_vision": false,
+      "supports_function_calling": false,
+      "capabilities": [
+        "general_reasoning",
+        "local_inference",
+        "rag",
+        "offline_execution",
+        "long_context"
+      ],
+      "hardware_requirements": {
+        "gpu_vram_gb": 48,
+        "recommended_gpu": "A6000/H100"
+      },
+      "cost_tier": "local_compute",
+      "latency_tier": "medium",
+      "recommended_for": [
+        "local_rag_agent",
+        "privacy_sensitive_tasks",
+        "offline_research"
+      ]
+    },
+
+    "qwen-2.5-72b-instruct": {
+      "provider": "ollama",
+      "deployment_type": "local",
+      "family": "qwen",
+      "vendor_family": "alibaba",
+      "version": "2.5",
+      "runtime_model_name": "qwen2.5:72b",
+      "huggingface_repo": "Qwen/Qwen2.5-72B-Instruct",
+      "quantization": "q4_k_m",
+      "context_window": 131072,
+      "supports_thinking": true,
+      "supports_vision": false,
+      "supports_function_calling": false,
+      "capabilities": [
+        "reasoning",
+        "math",
+        "agentic_tasks",
+        "rag",
+        "cheap_inference"
+      ],
+      "hardware_requirements": {
+        "gpu_vram_gb": 48,
+        "recommended_gpu": "Dual 4090 or A100"
+      },
+      "cost_tier": "local_compute",
+      "latency_tier": "medium",
+      "recommended_for": [
+        "reasoning_agents",
+        "validator_agent",
+        "research_assistant"
+      ]
+    },
+
+    "deepseek-coder-v2": {
+      "provider": "ollama",
+      "deployment_type": "local",
+      "family": "deepseek-coder",
+      "vendor_family": "deepseek",
+      "version": "v2",
+      "runtime_model_name": "deepseek-coder-v2:236b",
+      "huggingface_repo": "deepseek-ai/DeepSeek-Coder-V2-Instruct",
+      "quantization": "q4_k_m",
+      "context_window": 128000,
+      "supports_thinking": true,
+      "supports_vision": false,
+      "supports_function_calling": false,
+      "capabilities": [
+        "coding",
+        "refactoring",
+        "debugging",
+        "repo_analysis",
+        "test_generation"
+      ],
+      "hardware_requirements": {
+        "gpu_vram_gb": 80,
+        "recommended_gpu": "H100"
+      },
+      "cost_tier": "local_compute",
+      "latency_tier": "slow",
+      "recommended_for": [
+        "coding_agent",
+        "execution_agent",
+        "refactor_agent"
+      ]
+    },
+
+    "mistral-large-2411": {
+      "provider": "huggingface",
+      "deployment_type": "local",
+      "family": "mistral-large",
+      "vendor_family": "mistral",
+      "version": "24.11",
+      "runtime_model_name": "mistral-large",
+      "huggingface_repo": "mistralai/Mistral-Large-Instruct-2411",
+      "quantization": "4bit",
+      "context_window": 128000,
+      "supports_thinking": true,
+      "supports_vision": false,
+      "supports_function_calling": true,
+      "capabilities": [
+        "reasoning",
+        "european_languages",
+        "structured_output",
+        "enterprise_agents"
+      ],
+      "hardware_requirements": {
+        "gpu_vram_gb": 48
+      },
+      "cost_tier": "local_compute",
+      "latency_tier": "medium",
+      "recommended_for": [
+        "enterprise_workflows",
+        "structured_generation"
+      ]
+    },
+
+    "gemma-3-27b-it": {
+      "provider": "ollama",
+      "deployment_type": "local",
+      "family": "gemma",
+      "vendor_family": "google",
+      "version": "3",
+      "runtime_model_name": "gemma3:27b",
+      "huggingface_repo": "google/gemma-3-27b-it",
+      "quantization": "q4_k_m",
+      "context_window": 128000,
+      "supports_thinking": false,
+      "supports_vision": true,
+      "supports_function_calling": false,
+      "capabilities": [
+        "light_reasoning",
+        "vision",
+        "rag",
+        "fast_local_inference"
+      ],
+      "hardware_requirements": {
+        "gpu_vram_gb": 24,
+        "recommended_gpu": "4090"
+      },
+      "cost_tier": "local_compute",
+      "latency_tier": "fast",
+      "recommended_for": [
+        "lightweight_agents",
+        "vision_rag",
+        "edge_inference"
+      ]
+    },
+
+    "phi-4-reasoning": {
+      "provider": "huggingface",
+      "deployment_type": "local",
+      "family": "phi",
+      "vendor_family": "microsoft",
+      "version": "4",
+      "runtime_model_name": "phi-4",
+      "huggingface_repo": "microsoft/phi-4",
+      "quantization": "4bit",
+      "context_window": 64000,
+      "supports_thinking": true,
+      "supports_vision": false,
+      "supports_function_calling": false,
+      "capabilities": [
+        "small_reasoning",
+        "edge_devices",
+        "cheap_agents",
+        "fast_iteration"
+      ],
+      "hardware_requirements": {
+        "gpu_vram_gb": 16,
+        "recommended_gpu": "Laptop RTX 4080"
+      },
+      "cost_tier": "very_low",
+      "latency_tier": "very_fast",
+      "recommended_for": [
+        "local_router",
+        "light_reasoning",
+        "cheap_parallel_agents"
+      ]
+    }
+  },
+
+  "routing_policies": {
+    "fallback_order": [
+      "claude-sonnet-4-6",
+      "qwen-2.5-72b-instruct",
+      "llama-3.1-70b-instruct"
+    ],
+
+    "cost_optimization": {
+      "prefer_local_under_load": true,
+      "max_cloud_cost_tier": "high"
+    },
+
+    "vision_tasks": {
+      "primary": "gpt-4o",
+      "fallback": "claude-sonnet-4-6"
+    },
+
+    "coding_tasks": {
+      "primary": "claude-sonnet-4-6",
+      "secondary": "deepseek-coder-v2",
+      "offline_fallback": "qwen-2.5-72b-instruct"
+    }
+  }
+}

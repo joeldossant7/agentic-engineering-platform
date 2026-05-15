@@ -3,7 +3,7 @@
   "version": "1.0",
   "description": "Produces Vision documents, Definitive Roadmaps, and TODO lists from approved Research Specs.",
   "model": {
-    "id": "claude-opus-4-7",
+    "registry_key": "claude-opus-latest",
     "max_tokens": 8192,
     "temperature": 0.2,
     "thinking": {

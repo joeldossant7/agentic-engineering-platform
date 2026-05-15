@@ -15,6 +15,7 @@ Data sources available (use whichever apply):
 - Vector DB: organizational knowledge, prior analyses, documented metrics
 - Provided files: any files attached to this session
 - User-provided context: data stated explicitly in the conversation
+- Information from files structured and ordered across the repo/project
 
 When referencing data:
 - Cite the source: "According to [source], ..."
