@@ -1,0 +1,22 @@
+{
+  "name": "clarification_node",
+  "version": "1.0",
+  "description": "Detects ambiguous inputs and resolves them before routing to the PO Agent. Lightweight, fast, conversational.",
+  "model": {
+    "id": "claude-sonnet-4-6",
+    "max_tokens": 2048,
+    "temperature": 0.1
+  },
+  "prompt_file": "prompts/clarification_node.md",
+  "skills": [
+    "skills/clarification.md"
+  ],
+  "tools": [],
+  "max_clarification_rounds": 3,
+  "routing": {
+    "on_clear": "po_agent",
+    "on_max_rounds_exceeded": "escalate_to_human"
+  },
+  "output_contract": "contracts/clarification_to_po.json",
+  "constraints_ref": "policies/constraints.md"
+}

@@ -1,0 +1,30 @@
+{
+  "name": "product_owner_agent",
+  "version": "1.0",
+  "description": "Transforms clarified user inputs into structured Research Specs. Primary orchestrator of the SDD workflow.",
+  "model": {
+    "id": "claude-opus-4-7",
+    "max_tokens": 8192,
+    "temperature": 0.3,
+    "thinking": {
+      "enabled": true,
+      "budget_tokens": 5000
+    }
+  },
+  "prompt_file": "prompts/po_agent.md",
+  "skills": [
+    "skills/read_specs.md",
+    "skills/read_data.md",
+    "skills/systems_design.md"
+  ],
+  "tools": [
+    "vector_db_search",
+    "read_file",
+    "write_file"
+  ],
+  "hitl_checkpoints": [
+    "after_research_specs"
+  ],
+  "output_contract": "contracts/po_to_specialists.json",
+  "constraints_ref": "policies/constraints.md"
+}

@@ -1,0 +1,93 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PlannerToHITLContract",
+  "description": "Message schema from the Planner Agent to the final HITL checkpoint. Contains Vision, Roadmap, and Ticket Draft for human approval.",
+  "version": "1.0",
+  "sender": "planner_agent",
+  "receiver": "hitl_checkpoint",
+  "type": "object",
+  "required": ["contract_version", "spec_id", "produced_at", "vision", "roadmap", "ticket_draft"],
+  "properties": {
+    "contract_version": {
+      "type": "string",
+      "example": "1.0"
+    },
+    "spec_id": {
+      "type": "string",
+      "description": "Reference to the originating Research Spec"
+    },
+    "produced_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "vision": {
+      "type": "object",
+      "required": ["north_star", "key_outcomes"],
+      "properties": {
+        "north_star": { "type": "string" },
+        "strategic_alignment": { "type": "string" },
+        "key_outcomes": { "type": "array", "items": { "type": "string" } },
+        "non_goals": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "roadmap": {
+      "type": "object",
+      "required": ["phases"],
+      "properties": {
+        "phases": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "goal", "milestones"],
+            "properties": {
+              "name": { "type": "string" },
+              "duration_weeks": { "type": "integer" },
+              "goal": { "type": "string" },
+              "milestones": { "type": "array", "items": { "type": "string" } }
+            }
+          }
+        },
+        "risks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "description": { "type": "string" },
+              "likelihood": { "type": "string", "enum": ["H", "M", "L"] },
+              "impact": { "type": "string", "enum": ["H", "M", "L"] },
+              "mitigation": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "ticket_draft": {
+      "type": "object",
+      "required": ["project_key", "tickets"],
+      "properties": {
+        "project_key": { "type": "string" },
+        "tickets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["type", "title"],
+            "properties": {
+              "type": { "type": "string", "enum": ["epic", "story", "task"] },
+              "title": { "type": "string" },
+              "description": { "type": "string" },
+              "acceptance_criteria": { "type": "array", "items": { "type": "string" } },
+              "estimate": { "type": "string", "enum": ["S", "M", "L", "XL"] },
+              "parent_ref": { "type": "string", "description": "Title of the parent ticket" },
+              "labels": { "type": "array", "items": { "type": "string" } }
+            }
+          }
+        },
+        "open_questions": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Items that could not be ticketed due to unresolved questions"
+        }
+      }
+    }
+  }
+}

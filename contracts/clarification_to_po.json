@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ClarificationToPOContract",
+  "description": "Message schema from the Clarification Node to the Product Owner Agent",
+  "version": "1.0",
+  "sender": "clarification_node",
+  "receiver": "po_agent",
+  "type": "object",
+  "required": ["contract_version", "session_id", "original_input", "resolved_scope", "confidence", "routed_to"],
+  "properties": {
+    "contract_version": {
+      "type": "string",
+      "description": "Schema version of this contract",
+      "example": "1.0"
+    },
+    "session_id": {
+      "type": "string",
+      "description": "Unique identifier for the current Claude Code session"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of when this message was produced"
+    },
+    "original_input": {
+      "type": "string",
+      "description": "The raw user input as received"
+    },
+    "clarifications": {
+      "type": "array",
+      "description": "Q&A pairs from clarification rounds. Empty if input was immediately clear.",
+      "items": {
+        "type": "object",
+        "required": ["question", "answer"],
+        "properties": {
+          "round": { "type": "integer", "minimum": 1, "maximum": 3 },
+          "question": { "type": "string" },
+          "answer": { "type": "string" }
+        }
+      }
+    },
+    "resolved_scope": {
+      "type": "string",
+      "description": "One paragraph summarizing the clarified request"
+    },
+    "confidence": {
+      "type": "string",
+      "enum": ["high", "medium"],
+      "description": "Confidence level of the clarification. Low confidence must not be routed."
+    },
+    "routed_to": {
+      "type": "string",
+      "enum": ["po_agent"],
+      "description": "Destination agent for this message"
+    }
+  }
+}

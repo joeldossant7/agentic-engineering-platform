@@ -1,0 +1,24 @@
+{
+  "name": "jira_agent",
+  "version": "1.0",
+  "description": "Converts approved ticket drafts into Jira issues. Handles epic/story/task hierarchy and field mapping.",
+  "model": {
+    "id": "claude-sonnet-4-6",
+    "max_tokens": 4096,
+    "temperature": 0.1
+  },
+  "prompt_file": "prompts/jira_agent.md",
+  "skills": [
+    "skills/ticket_assembly.md"
+  ],
+  "tools": [
+    "jira_create_issue",
+    "jira_update_issue",
+    "jira_search",
+    "read_file"
+  ],
+  "input_contract": "contracts/planner_to_hitl.json",
+  "playbook_ref": "playbook/jira.md",
+  "constraints_ref": "policies/constraints.md",
+  "requires_human_approval_before_write": true
+}

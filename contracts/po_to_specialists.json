@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "POToSpecialistsContract",
+  "description": "Message schema from the Product Owner Agent to specialist agents, after HITL spec approval",
+  "version": "1.0",
+  "sender": "po_agent",
+  "receiver": ["planner_agent", "systems_design_agent", "infra_agent", "coding_agent"],
+  "type": "object",
+  "required": ["contract_version", "spec_id", "spec_version", "approved_at", "approved_by", "content", "routing"],
+  "properties": {
+    "contract_version": {
+      "type": "string",
+      "example": "1.0"
+    },
+    "spec_id": {
+      "type": "string",
+      "description": "Unique identifier for this Research Spec (e.g., SPEC-2026-001)"
+    },
+    "spec_version": {
+      "type": "integer",
+      "description": "Version number. Increments on each edit cycle.",
+      "minimum": 1
+    },
+    "approved_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "approved_by": {
+      "type": "string",
+      "description": "Human identifier who approved the spec at the HITL checkpoint"
+    },
+    "content": {
+      "type": "object",
+      "description": "The full Research Spec content",
+      "required": ["title", "context", "scope", "current_state", "desired_state"],
+      "properties": {
+        "title": { "type": "string" },
+        "context": { "type": "string" },
+        "scope": {
+          "type": "object",
+          "properties": {
+            "included": { "type": "array", "items": { "type": "string" } },
+            "excluded": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "current_state": { "type": "string" },
+        "desired_state": { "type": "string" },
+        "open_questions": { "type": "array", "items": { "type": "string" } },
+        "dependencies": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "routing": {
+      "type": "object",
+      "description": "Which agents to activate and with what priority",
+      "properties": {
+        "agents": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["agent", "priority"],
+            "properties": {
+              "agent": { "type": "string" },
+              "priority": { "type": "integer", "minimum": 1 },
+              "instructions": { "type": "string" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

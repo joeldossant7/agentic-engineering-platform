@@ -1,0 +1,42 @@
+{
+  "version": "1.0",
+  "description": "Claude Code session settings for the agentic engineering platform",
+  "permissions": {
+    "allow": [
+      "Read(**)",
+      "Glob(**)",
+      "Grep(**)",
+      "Edit(agents/**)",
+      "Edit(prompts/**)",
+      "Edit(skills/**)",
+      "Edit(policies/**)",
+      "Edit(playbook/**)",
+      "Edit(contracts/**)",
+      "Edit(llm/**)",
+      "Write(agents/**)",
+      "Write(prompts/**)",
+      "Write(skills/**)",
+      "Write(policies/**)",
+      "Write(playbook/**)",
+      "Write(contracts/**)",
+      "Write(llm/**)"
+    ],
+    "deny": [
+      "Bash(rm -rf **)",
+      "Bash(git push --force **)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo \"[AUDIT] File write/edit triggered at $(date)\" >> .claude/audit.log"
+          }
+        ]
+      }
+    ]
+  }
+}

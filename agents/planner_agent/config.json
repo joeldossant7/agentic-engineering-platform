@@ -1,0 +1,30 @@
+{
+  "name": "planner_agent",
+  "version": "1.0",
+  "description": "Produces Vision documents, Definitive Roadmaps, and TODO lists from approved Research Specs.",
+  "model": {
+    "id": "claude-opus-4-7",
+    "max_tokens": 8192,
+    "temperature": 0.2,
+    "thinking": {
+      "enabled": true,
+      "budget_tokens": 4000
+    }
+  },
+  "prompt_file": "prompts/planner_agent.md",
+  "skills": [
+    "skills/systems_design.md",
+    "skills/project_management.md",
+    "skills/ticket_assembly.md"
+  ],
+  "tools": [
+    "read_file",
+    "write_file"
+  ],
+  "hitl_checkpoints": [
+    "after_vision_and_roadmap"
+  ],
+  "input_contract": "contracts/po_to_specialists.json",
+  "output_contract": "contracts/planner_to_hitl.json",
+  "constraints_ref": "policies/constraints.md"
+}

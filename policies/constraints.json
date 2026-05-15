@@ -1,0 +1,16 @@
+{
+  "_note": "Behavioral constraints are defined in constraints.md. This file is a machine-readable index for tooling that needs to parse them programmatically.",
+  "version": "1.0",
+  "constraints": [
+    { "id": "C-01", "category": "scope", "summary": "No feature code in this repo", "ref": "constraints.md#scope-constraints" },
+    { "id": "C-02", "category": "scope", "summary": "No secrets or credentials in files", "ref": "constraints.md#scope-constraints" },
+    { "id": "C-03", "category": "scope", "summary": "No opinionated tech choices without confirmation", "ref": "constraints.md#scope-constraints" },
+    { "id": "C-04", "category": "behavior", "summary": "HITL required before irreversible actions", "ref": "constraints.md#behavioral-constraints" },
+    { "id": "C-05", "category": "behavior", "summary": "Single responsibility per file", "ref": "constraints.md#behavioral-constraints" },
+    { "id": "C-06", "category": "behavior", "summary": "Prompts in English", "ref": "constraints.md#behavioral-constraints" },
+    { "id": "C-07", "category": "behavior", "summary": "No silent assumptions on missing config", "ref": "constraints.md#behavioral-constraints" },
+    { "id": "C-08", "category": "model", "summary": "Opus for PO and systems-design agents", "ref": "constraints.md#model-selection-constraints" },
+    { "id": "C-09", "category": "model", "summary": "Sonnet for clarification and jira agents", "ref": "constraints.md#model-selection-constraints" },
+    { "id": "C-10", "category": "quality", "summary": "Agent configs must be valid JSON", "ref": "constraints.md#output-quality-constraints" }
+  ]
+}
