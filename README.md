@@ -1,6 +1,6 @@
 # Agentic Engineering Platform
 
-Este repo NO pertenece a un proyecto. Pertenece a la organización.
+Este repo NO pertenece a un proyecto. Pertenece a una organización.
 
 **ESTE REPO NO TIENE FEATURES.**
 Tiene: conocimiento reusable, operational doctrine, engineering governance.
