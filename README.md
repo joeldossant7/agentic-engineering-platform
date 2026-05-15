@@ -13,59 +13,57 @@ Es el "cerebro corporativo".
 
 ```
 agentic-engineering-platform/
-├── CLAUDE.md                   ← Comportamiento de Claude en sesión (leer primero)
-├── .claude/
-│   └── settings.json           ← Permisos y hooks de Claude Code
+├── .claude/                    ← Contenedor de configuración y knowledge base
+│   ├── CLAUDE.md               ← Comportamiento de Claude en sesión (leer primero)
+│   ├── settings.json           ← Permisos y hooks de Claude Code
+│   ├── requirements.txt        ← anthropic, psycopg2, pgvector, python-dotenv
+│   │
+│   ├── agents/                 ← Identidad de cada agente
+│   │   ├── clarification_node/
+│   │   │   └── config.json     ← Modelo: claude-sonnet-4-6
+│   │   ├── po_agent/
+│   │   │   └── config.json     ← Modelo: claude-opus-4-7
+│   │   ├── planner_agent/
+│   │   │   └── config.json     ← Modelo: claude-opus-4-7
+│   │   └── jira_agent/
+│   │       └── config.json     ← Modelo: claude-sonnet-4-6
+│   │
+│   ├── contracts/              ← Schemas de mensajes entre agentes
+│   │   ├── clarification_to_po.json
+│   │   ├── po_to_specialists.json
+│   │   └── planner_to_hitl.json
+│   │
+│   ├── llm/                    ← Implementaciones de nodos LLM
+│   │   └── clarification_node.py
+│   │
+│   ├── playbook/               ← Guías de integración con herramientas externas
+│   │   ├── jira.md             ← Autenticación, field mapping, rate limits
+│   │   ├── github.md           ← PR workflow, issue creation, branch conventions
+│   │   └── vector_db.md        ← pgvector schema, query patterns, indexing
+│   │
+│   ├── policies/               ← Governance y constraints para Claude
+│   │   ├── constraints.md      ← Límites duros de comportamiento
+│   │   ├── rules.md            ← Reglas de flujo de trabajo (R-01 a R-10)
+│   │   ├── work-dynamic.md     ← Dinámica HITL y patrones de interacción
+│   │   ├── constraints.json    ← Índice machine-readable de constraints
+│   │   ├── rules.json          ← Índice machine-readable de rules
+│   │   └── README.es.md        ← Guía de políticas en español
+│   │
+│   ├── prompts/                ← System prompts por agente
+│   │   ├── po_agent.md
+│   │   ├── planner_agent.md
+│   │   ├── jira_agent.md
+│   │   └── clarification_node.md
+│   │
+│   └── skills/                 ← Fragmentos de prompt inyectables
+│       ├── clarification.md    ← Detección de ambigüedad
+│       ├── read_specs.md       ← Recuperación de specs del Vector DB
+│       ├── read_data.md        ← Recuperación de datos estructurados
+│       ├── systems_design.md   ← Diseño de sistemas, ADRs, Mermaid
+│       ├── project_management.md ← MoSCoW, fases, roadmaps, risks
+│       └── ticket_assembly.md  ← Epic → Story → Task hierarchy
 │
-├── agents/                     ← Identidad de cada agente
-│   ├── clarification_node/
-│   │   └── config.json         ← Modelo: claude-sonnet-4-6
-│   ├── po_agent/
-│   │   └── config.json         ← Modelo: claude-opus-4-7
-│   ├── planner_agent/
-│   │   └── config.json         ← Modelo: claude-opus-4-7
-│   ├── jira_agent/
-│   │   └── config.json         ← Modelo: claude-sonnet-4-6
-│   ├── po_agent.py             ← Entry point Python del PO Agent
-│   ├── planner_agent.py        ← Entry point Python del Planner Agent
-│   └── jira_agent.py           ← Entry point Python del Jira Agent
-│
-├── contracts/                  ← Schemas de mensajes entre agentes
-│   ├── clarification_to_po.json
-│   ├── po_to_specialists.json
-│   └── planner_to_hitl.json
-│
-├── llm/                        ← Implementaciones de nodos LLM
-│   └── clarification_node.py
-│
-├── playbook/                   ← Guías de integración con herramientas externas
-│   ├── jira.md                 ← Autenticación, field mapping, rate limits
-│   ├── github.md               ← PR workflow, issue creation, branch conventions
-│   └── vector_db.md            ← pgvector schema, query patterns, indexing
-│
-├── policies/                   ← Governance y constraints para Claude
-│   ├── constraints.md          ← Límites duros de comportamiento
-│   ├── rules.md                ← Reglas de flujo de trabajo (R-01 a R-10)
-│   ├── work-dynamic.md         ← Dinámica HITL y patrones de interacción
-│   ├── constraints.json        ← Índice machine-readable de constraints
-│   ├── rules.json              ← Índice machine-readable de rules
-│   └── README.es.md            ← Guía de políticas en español
-│
-├── prompts/                    ← System prompts por agente
-│   ├── po_agent.md
-│   ├── planner_agent.md
-│   ├── jira_agent.md
-│   └── clarification_node.md
-│
-├── skills/                     ← Fragmentos de prompt inyectables
-│   ├── clarification.md        ← Detección de ambigüedad
-│   ├── read_specs.md           ← Recuperación de specs del Vector DB
-│   ├── read_data.md            ← Recuperación de datos estructurados
-│   ├── systems_design.md       ← Diseño de sistemas, ADRs, Mermaid
-│   ├── project_management.md   ← MoSCoW, fases, roadmaps, risks
-│   └── ticket_assembly.md      ← Epic → Story → Task hierarchy
-│
-└── requirements.txt            ← anthropic, psycopg2, pgvector, python-dotenv
+└── README.md                   ← Este archivo
 ```
 
 ## Cómo usar este repo
