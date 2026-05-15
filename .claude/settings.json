@@ -1,11 +1,27 @@
 {
   "version": "1.0",
   "description": "Claude Code session settings for the agentic engineering platform",
+
+  "skills": {
+    "base_path": "./.claude/skills",
+    "autoload": false,
+    "registry": {
+      "validator": "./.claude/skills/validator.md",
+      "clarification": "./.claude/skills/clarification.md",
+      "systems_design": "./.claude/skills/systems_design.md",
+      "read_specs": "./.claude/skills/read_specs.md",
+      "read_data": "./.claude/skills/read_data.md",
+      "ticket_assembly": "./.claude/skills/ticket_assembly.md",
+      "project_management": "./.claude/skills/project_management.md"
+    }
+  },
+
   "permissions": {
     "allow": [
       "Read(**)",
       "Glob(**)",
       "Grep(**)",
+
       "Edit(agents/**)",
       "Edit(prompts/**)",
       "Edit(skills/**)",
@@ -13,6 +29,7 @@
       "Edit(playbook/**)",
       "Edit(contracts/**)",
       "Edit(llm/**)",
+
       "Write(agents/**)",
       "Write(prompts/**)",
       "Write(skills/**)",
@@ -21,11 +38,13 @@
       "Write(contracts/**)",
       "Write(llm/**)"
     ],
+
     "deny": [
       "Bash(rm -rf **)",
       "Bash(git push --force **)"
     ]
   },
+
   "hooks": {
     "PreToolUse": [
       {

@@ -3,7 +3,7 @@
   "version": "1.0",
   "description": "Converts approved ticket drafts into Jira issues. Handles epic/story/task hierarchy and field mapping.",
   "model": {
-    "id": "claude-sonnet-4-6",
+    "id": "gpt-4o",
     "max_tokens": 4096,
     "temperature": 0.1
   },
