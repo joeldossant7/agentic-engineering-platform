@@ -13,7 +13,7 @@ At its core, SDD is an AI-augmented assembly line where human developers hold ve
 | Problem | How SDD addresses it |
 |---|---|
 | Ambiguous requirements reaching developers | Clarification Node catches underspecified inputs before any work begins |
-| Specs written in isolation without codebase context | Product Owner Agent queries a Vector DB of existing knowledge |
+| Specs written in isolation without codebase context | Product Owner Agent queries a Vector DB of existing knowledge and ENGRAM memory for past-related context |
 | Developers building to wrong spec | HITL checkpoints enforce approval before moving downstream |
 | Tickets that don't reflect agreed specs | Jira Agent generates tickets *from* approved specs, not from memory |
 | Coding agents working blind | Coding Agents read both the repo and the tickets before touching code |

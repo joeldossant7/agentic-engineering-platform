@@ -30,3 +30,5 @@ def load_skill(name: str):
 
 if __name__ == "__main__":
     mcp.run()
+
+# IN PROGRESS: This server is a simple implementation to serve skills from the "skills" directory based on a registry defined in "registry.json". It provides two tools: one to list available skills and another to load the content of a specific skill.

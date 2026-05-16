@@ -179,3 +179,16 @@ GitHub (commit branch)
 All checkpoints are **hard stops** — no timeout-based auto-approval.
 
 For details, see [`.sdd/spec-driven-development.md`](./.sdd/spec-driven-development.md).
+
+
+
+
+TODO's:
+- actualizar contratos entre agentes
+- terminar de definir agentes y tools --> pulir agents and tools, set them up and sync functionality 
+- model registry set up  --> instantiate models and make sure they download and run ok
+- make it all LangGraph friendly --> Agents + tools + transitions
+- hacer terminal GUI (poder acceder a un flujo completo end to end, chain of flows, or individual access)
+- backlog: engram set up sqlite SQLite/LanceDB local + Postgres cloud or SQLite + FTS/BM25 local + Mongo cloud
+- backlog: rag pipelines
+- backlog: mcp set up
